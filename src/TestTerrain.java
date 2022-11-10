@@ -1,10 +1,3 @@
-/**
- * @author Christophe Marsala (LU2IN002 2022oct)
- * 
- * Gestion d'un terrain
- *
- */
-
 import java.util.ArrayList;
 
 public class TestTerrain {
