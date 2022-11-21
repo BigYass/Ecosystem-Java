@@ -13,6 +13,7 @@ public class TestTerrain {
 		t.affiche(2);
 		// Informations sur le terrain
 		System.out.println("Informations sur le terrain:\n"+t);		
+
 		
 		// On créé une ressource
 		Ressource e1 = new Ressource("Miel",5);
