@@ -1,24 +1,26 @@
-BIN = bin
-CLASS = class
-JFLAGS = -d $(BIN) -cp $(CLASS)
-JC = javac
+# Makefile obsolète, compillez manuellement
 
-.SUFFIXES: .java .class
+# BIN = bin
+# CLASS = class
+# JFLAGS = -d $(BIN) -cp $(CLASS)
+# JC = javac
 
-.java.class:
-	$(JC) $(JFLAGS) src/*.java
-	cp $(CLASS)/* $(BIN)
+# .SUFFIXES: .java .class
 
-CLASSES = src/TestTerrain.java
+# .java.class:
+# 	$(JC) $(JFLAGS) src/*.java
+# 	cp $(CLASS)/* $(BIN)
 
-MAIN = TestTerrain
+# CLASSES = src/TestTerrain.java
 
-default: classes 
+# MAIN = TestTerrain
 
-classes: $(CLASSES:.java=.class)
+# default: classes 
 
-clean:
-	rm -f $(BIN)/*.class
+# classes: $(CLASSES:.java=.class)
 
-run: $(BIN)/$(MAIN).class 
-	java -cp $(BIN) TestTerrain
+# clean:
+# 	rm -f $(BIN)/*.class
+
+# run: $(BIN)/$(MAIN).class 
+# 	java -cp $(BIN) TestTerrain
