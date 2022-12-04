@@ -1,23 +1,54 @@
 package Entity;
 
-public abstract class Entity{
+public abstract class Entity {
   /**
    * Position de l'entité
    */
   protected int x, y;
 
   /**
+   * Initialise l'entité en position (x, y)
+   * @param x Numéro de la ligne
+   * @param y Numéro de la colonne
+   */
+  public Entity(int x, int y){
+    this.x = x;
+    this.y = y;
+  }
+
+  /**
+   * Initialise l'entité en position (0, 0)
+   */
+  public Entity(){
+    this.x = 0;
+    this.y = 0;
+  }
+  
+  /**
    * @param x Position de la cible en x
    * @param y Position de la cible en y
-   * @return La distance entre l'entité et la cible de coordonée x et y
+   * @return Retourne la distance entre l'entité et la cible de coordonée x et y
    */
-
-  public double distance(int x, int y){ return Math.sqrt(Math.pow(this.x - x, 2.) + Math.pow(this.y - y, 2.)); }
-
+  
+  public double distance(int x, int y){ 
+    return Math.sqrt(Math.pow(this.x - x, 2.) + Math.pow(this.y - y, 2.)); 
+  }
+  
   /**
    * @param xnew Nouvelle position x pour l'entité
    * @param ynew Nouvelle position y pour l'entité
-   * Déplace l'entité vers la position (xnew, ynew) si la case est vide
+   * Déplace l'entité vers la position (xnew, ynew) si la case est vide, sinon reste fixe
    */
-  public void seDeplacer(int xnew, int ynew) { x = xnew; y = ynew; }
+  public void seDeplacer(int xnew, int ynew) { 
+    /* TODO */ 
+  }
+
+  public int getX() {
+    return x;
+  }
+  
+  public int getY() {
+    return y;
+  }
+  
 }

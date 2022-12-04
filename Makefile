@@ -1,26 +1,29 @@
-# Makefile obsolète, compillez manuellement
+BIN = bin
+CLASS = class
+JFLAGS = -d $(BIN) -cp class
+JC = javac
 
-# BIN = bin
-# CLASS = class
-# JFLAGS = -d $(BIN) -cp $(CLASS)
-# JC = javac
+.SUFFIXES: .java .class
 
-# .SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) src/*.java
+	cp $(CLASS)/* $(BIN)
 
-# .java.class:
-# 	$(JC) $(JFLAGS) src/*.java
-# 	cp $(CLASS)/* $(BIN)
+CLASSES = src/Ecosys/Ressource.java src/Ecosys/Terrain.java src/TestTerrain.java
 
-# CLASSES = src/TestTerrain.java
+MAIN = TestTerrain
 
-# MAIN = TestTerrain
+default: classes 
 
-# default: classes 
+classes: $(CLASSES:.java=.class)
 
-# classes: $(CLASSES:.java=.class)
+clean:
+	rm -f $(BIN)/*
 
-# clean:
-# 	rm -f $(BIN)/*.class
+run: $(BIN)/$(MAIN).class 
+	java -cp $(BIN) TestTerrain
 
-# run: $(BIN)/$(MAIN).class 
-# 	java -cp $(BIN) TestTerrain
+start: src/$(MAIN).java
+	make
+	make run
+	make clean
