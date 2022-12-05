@@ -1,9 +1,7 @@
 package Ecosys;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import Entity.Entity;
 import Entity.LivingEntity;
 
 public class Simulation extends Object{
@@ -11,15 +9,6 @@ public class Simulation extends Object{
    * Les ressources naturels tels que l'herbe se régen tout les {@code PERIODE_REGEN_RESS} tours
    */
   private static final int PERIODE_REGEN_RESS = 5;
-  /**
-   * Nombre d'entité présent dans la simulation
-   */
-  private final int nbEntite;
-
-  /**
-   * Nombre de ressources présent dans la simulation
-   */
-  private final int nbRessource;
   
   /**
    * Terrain de la simulation contenant toutes les ressources  
@@ -43,10 +32,6 @@ public class Simulation extends Object{
    * @param n Nombre d'entités à générer. Si la valeurs dépasse NOMBRE_MAX_ENTITE, cette valeurs est remplacée
    */
   public Simulation(int m, int n){
-
-    //Initialisation des variables
-    nbRessource = m;
-    nbEntite = n;
 
     //Initialisation du terrain
     for(int i = 0; i < terrain.nbLignes; i++)

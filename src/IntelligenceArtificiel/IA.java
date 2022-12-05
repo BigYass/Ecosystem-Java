@@ -21,7 +21,7 @@ public interface IA {
   /**
    * Renvoie le prochain mouvement choisis 
    * @return Retourne la direction que l'entité souhaites aller:
-   * @see Tools.Movement
+   * @see Tools.Action.Movement
    */
   public Movement nextMove();
 

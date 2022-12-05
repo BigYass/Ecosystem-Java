@@ -29,7 +29,7 @@ public enum Action {
    * Enum pour les mouvements 
    */
   public enum Movement{
-    GAUCHE, HAUT, DROITE, BAS, CENTRE;
+    GAUCHE, HAUT, DROITE, BAS;
 
   /**
    * Renvoie un mouvement aléatoire

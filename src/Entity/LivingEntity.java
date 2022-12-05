@@ -88,7 +88,7 @@ public abstract class LivingEntity extends Entity{
         new_x += nextMove == Movement.GAUCHE ? 1 : 0 - (nextMove == Movement.DROITE ? 1 : 0);
         new_y += nextMove == Movement.HAUT ? 1 : 0 - (nextMove == Movement.BAS ? 1 : 0);
 
-        energie -= distance(new_x, new_y)*4 + 1;
+        energie -= distance(new_x, new_y)*4;
 
         seDeplacer(new_x, new_y);
   

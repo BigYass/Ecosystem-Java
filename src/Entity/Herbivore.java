@@ -1,16 +1,8 @@
 package Entity;
 
-import java.util.ArrayList;
-
 import Ecosys.Ressource;
 
 public class Herbivore extends LivingEntity{
-
-  @Override
-  public void doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void eat(Ressource ressource, int quantite) {

@@ -41,7 +41,7 @@ public abstract class Entity extends Object{
    * @return La distance
    */
   public double distance(Entity entity){
-    return distance(entity.x, entity.y);
+    return distance(entity.getX(), entity.getY());
   }
 
   /**
