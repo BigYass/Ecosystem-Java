@@ -3,73 +3,60 @@ package IntelligenceArtificiel;
 import java.util.ArrayList;
 
 import Ecosys.Ressource;
+import Entity.Carnivore;
 import Entity.Entity;
+import Entity.LivingEntity;
 import Tools.Action;
 import Tools.Action.Movement;
 
-public class CarnivoreRandomIA implements IA{
-  /**
-   * Probabilité de changer de position à chaque appel de nextMove
-   */
-  private double probToChangeDirection = .1;
-
-  /**
-   * Dernière direction enregistrer, change si: <p><code>Math.random() < probToChangeDirection</code> 
-   * @see Tools.Action
-   */
-  private Movement nextDirection;
-
-  /**
-   * Constructeur de <code>CarnivoreRandomIA</code>
-   * @param randomFactor La probabilité que <code>nextDirection</code> change. Par défault: 0.1
-   * @param firstDirection Initialise la direction à <code>firstDirection</code>. Par défault: Gauche
-   */
-  public CarnivoreRandomIA(double randomFactor, Movement firstDirection){
-    this.probToChangeDirection = randomFactor;
-    this.nextDirection = firstDirection;
-  }
-
-  /**
-   * Constructeur de <code>CarnivoreRandomIA</code>
-   * @param firstDirection Initialise la direction à <code>firstDirection</code>. Par défault: Gauche
-   */
-  public CarnivoreRandomIA(Movement firstDirection){
-    this.nextDirection = firstDirection;
-  }
-
-  /**
-   * Constructeur de <code>CarnivoreRandomIA</code>
-   * @param randomFactor La probabilité que <code>nextDirection</code> change. Par défault: 0.1
-   */
-  public CarnivoreRandomIA(double randomFactor){
-    this.probToChangeDirection = randomFactor;
-    this.nextDirection = Movement.GAUCHE;
-  }
-
-  /**
-   * Constructeur de <code>CarnivoreRandomIA</code>
-   */
-  public CarnivoreRandomIA(){
-    this.nextDirection = Movement.GAUCHE;
-  }
+/**
+ * IA au mouvement aléatoire et mangeant la proie la plus proche
+ * <p>Réservé au carnivore
+ */
+public class CarnivoreRandomIA extends RandomIA{ 
   
-  @Override
-  public Movement nextMove(ArrayList<Ressource> ressources, ArrayList<Entity> entities) {
-    if(Math.random() < probToChangeDirection)
-      nextDirection = Movement.randomDirection();
-    return nextDirection;
+  //TODO Régler le problème d'implémentation de nextMove()
+  
+  private final Carnivore body;
+
+  public CarnivoreRandomIA(double randomFactor, Movement firstDirection, Carnivore body) {
+    super(randomFactor, firstDirection);
+    this.body = body;
+  }
+
+  public CarnivoreRandomIA(Movement firstDirection, Carnivore body) {
+    super(firstDirection);
+    this.body = body;
+  }
+
+  public CarnivoreRandomIA(double randomFactor, Carnivore body) {
+    super(randomFactor);
+    this.body = body;
+  }
+
+  public CarnivoreRandomIA(Carnivore body) {
+    super();
+    this.body = body;
   }
 
   @Override
-  public Movement nextMove() {
-    return nextMove(null, null);
-  }
+  public Action nextAction(Ressource[] ressources, LivingEntity[] entities) {
+    Action nextAction = Action.WAIT;
 
+    //Recherche les entités à porté
+    for (Entity entity : entities){
+      //Si une entité est à porté, ordonne au corps de mangé la proie
+      if (entity.distance(body.getX(), body.getY()) < body.getMaxReach()){
+        nextAction = Action.EAT_ANIMAL;
+        nextAction.setTarget(entity);
 
-  @Override
-  public Action nextAction(ArrayList<Ressource> ressources, ArrayList<Entity> entities) {
-    // TODO Auto-generated method stub
-    return null;
+        return nextAction;
+      }
+    }
+
+    //Sinon se déplace
+    nextAction = Action.MOVE;
+    return nextAction;
   }
   
 }

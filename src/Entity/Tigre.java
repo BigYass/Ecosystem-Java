@@ -7,7 +7,7 @@ import Ecosys.Ressource;
 public class Tigre extends LivingEntity{
 
   @Override
-  public void doStuff(ArrayList<Ressource> ressources, ArrayList<Entity> entities) {
+  public void doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities) {
     // TODO Auto-generated method stub
     
   }
