@@ -1,5 +1,7 @@
 package Entity;
 
+import Ecosys.Ressource;
+
 public abstract class Entity extends Object{
   /**
    * Position de l'entité
@@ -29,9 +31,26 @@ public abstract class Entity extends Object{
    * @param y Position de la cible en y
    * @return Retourne la distance entre l'entité et la cible de coordonée x et y
    */
-  
   public double distance(int x, int y){ 
     return Math.sqrt(Math.pow(this.x - x, 2.) + Math.pow(this.y - y, 2.)); 
+  }
+
+  /**
+   * Calcule la distance 
+   * @param entity L'autre entité
+   * @return La distance
+   */
+  public double distance(Entity entity){
+    return distance(entity.x, entity.y);
+  }
+
+  /**
+   * Calcule la distance entre l'entité et la ressource donée en paramètre
+   * @param ressource Le ressource avec laquel on calcule la distance
+   * @return La disance 
+   */
+  public double distance(Ressource ressource){
+    return distance(ressource.getX(), ressource.getY());
   }
   
   /**

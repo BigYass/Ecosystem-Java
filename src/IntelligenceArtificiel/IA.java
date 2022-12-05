@@ -1,12 +1,12 @@
 package IntelligenceArtificiel;
 
-import java.util.ArrayList;
-
 import Ecosys.Ressource;
-import Entity.Entity;
-import Tools.Action;
+import Entity.LivingEntity;
 import Tools.Action.Movement;;
 
+/**
+ * Class permettant aux {@codeLivingEntity} de faire de choix
+ */
 public interface IA {
 
   /**
@@ -16,14 +16,14 @@ public interface IA {
    * @return Retourne un <code>Tools.Movement représentant la direction que l'entité souhaites aller:
    * @see Tools.Movement
    */
-  Movement nextMove(ArrayList<Ressource> ressources, ArrayList<Entity> entities);
+  public Movement nextMove(Ressource[] ressources, LivingEntity[] entities);
 
   /**
    * Renvoie le prochain mouvement choisis 
    * @return Retourne la direction que l'entité souhaites aller:
    * @see Tools.Movement
    */
-  Movement nextMove();
+  public Movement nextMove();
 
-  public Action nextAction(ArrayList<Ressource> ressources, ArrayList<Entity> entities);
+  public Movement nextAction(Ressource[] ressources, LivingEntity[] entities);
 }

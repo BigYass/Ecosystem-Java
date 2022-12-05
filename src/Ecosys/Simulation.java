@@ -1,18 +1,16 @@
 package Ecosys;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import Entity.Entity;
+import Entity.LivingEntity;
 
 public class Simulation extends Object{
   /**
-   * Nombre d'entité max que peut contenir la simulation
+   * Les ressources naturels tels que l'herbe se régen tout les {@code PERIODE_REGEN_RESS} tours
    */
-  private static final int NOMBRE_MAX_ENTITE = 100;
-
-  /**
-   * Nombre de ressource max que la simulation peut contenir
-   */
-  private static final int NOMBRE_MAX_RESSOURCE = 100;
-
+  private static final int PERIODE_REGEN_RESS = 5;
   /**
    * Nombre d'entité présent dans la simulation
    */
@@ -31,12 +29,12 @@ public class Simulation extends Object{
   /**
    * Tableau des entités de la simulation
    */
-  private Entity[] entities = new Entity[NOMBRE_MAX_ENTITE];
+  private ArrayList<LivingEntity> entities = new ArrayList<LivingEntity>();
 
   /**
    * Ensemble des ressources contenu dans la simulation
    */
-  private Ressource[] ressources = new Ressource[NOMBRE_MAX_RESSOURCE];
+  private ArrayList<Ressource> ressources = new ArrayList<Ressource>();
 
   /**
    * Constructeur de la simulation.
@@ -51,23 +49,21 @@ public class Simulation extends Object{
     nbEntite = n;
 
     //Initialisation du terrain
+    for(int i = 0; i < terrain.nbLignes; i++)
+      for(int j = 0; j < terrain.nbCollonnes; j++)
+        terrain.setCase(i, j, new Ressource("terre", 1));
 
     //Initialisation des ressources
-    for(int i = 0; i < Math.min(m, NOMBRE_MAX_RESSOURCE); i++){
+    for(int i = 0; i < m; i++){
       int x = (int)(Math.random() * terrain.nbLignes);
       int y = (int)(Math.random() * terrain.nbCollonnes);
-      
 
-      ressources[i] = new Ressource(null, 50);
-      ressources[i].setPosition(n, i);
-      terrain.setCase(n, i, null);
-      
+      ressources.add(new Ressource("Herbes", 50));
+      ressources.get(i).setPosition(x, y);
     }
 
     //Initialisation des entités (à faire plus tards)
   }
-  
-  public void update(){ /* TODO */ }
   
   /**
    * Exécute la simulation pendant maxRound tours
@@ -75,6 +71,25 @@ public class Simulation extends Object{
    */
   public void execute(int maxRound) {
     for (int i = 0; i < maxRound; i++)
-      update();
+    {
+      for (LivingEntity entity : entities)
+      {
+        if (entity.getEnergie() < 0)
+        {
+          entities.remove(entity);
+        }
+        else
+        {
+          entity.doStuff(ressources, entities);
+        }
+      }
+
+      if(i % PERIODE_REGEN_RESS == 0){
+        for (Ressource ressource : ressources){
+          ressource.setQuantite(ressource.getQuantite() + 1);
+        }
+      }
+    }
+      
   }
 }

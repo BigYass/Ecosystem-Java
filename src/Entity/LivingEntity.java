@@ -8,6 +8,7 @@ import Tools.Action;
 import Tools.Action.Movement;
 
 public abstract class LivingEntity extends Entity{
+  protected final double maxReachDistance = 1.5;
   /**
    * Energie vitale permettant de faire des actions et de se reproduire
    */
@@ -23,17 +24,30 @@ public abstract class LivingEntity extends Entity{
    */
   protected IA cerveau;
 
+
+  public double getMaxReach(){
+    return maxReachDistance;
+  }
+
+  public double getEnergie(){
+    return energie;
+  }
   /**
    * L'entité tente des manger/boire
    * @param ressources Liste des ressources visible pour l'être vivant
    * @param entities Liste des entités visible pour l'être vivant
    * @return Retourne 0
    */
-  public abstract void doStuff(ArrayList<Ressource> ressources, ArrayList<Entity> entities);
+  public void doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities){
+    Action nextAction = cerveau.nextAction((Ressource[])ressources.toArray(), (LivingEntity[])entities.toArray());
+    act(nextAction);
+
+    energie--;
+    if(energie < 0) die();
+  }
 
   /**
    * L'entité tente des manger/boire
-   * @return Retourne 0
    */
   public void doStuff(){
     doStuff(null, null);
@@ -61,6 +75,10 @@ public abstract class LivingEntity extends Entity{
    */
   public abstract void eat(LivingEntity animal);
 
+  /**
+   * Produit l'action contenu dans l'enum
+   * @param action Enum choisissant l'action fait
+   */
   public void act(Action action){
     switch (action) {
       case MOVE:
@@ -95,4 +113,11 @@ public abstract class LivingEntity extends Entity{
     }
   }
 
+  /**
+   * Mets l'énergie à -1, pendant l'execution de la simulation, toute les entités
+   * avec une énergie inférieur à 0 se vera suppimer
+   */
+  public void die(){
+    energie = -1;
+  }
 }
