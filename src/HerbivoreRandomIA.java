@@ -1,12 +1,3 @@
-package IntelligenceArtificiel;
-
-import Ecosys.Ressource;
-import Entity.Herbivore;
-import Entity.LivingEntity;
-import Tools.Action;
-import Tools.Action.Movement;
-
-
 public class HerbivoreRandomIA extends RandomIA{
 
   //Déplacer body dans une classe supérieur
@@ -25,6 +16,12 @@ public class HerbivoreRandomIA extends RandomIA{
   @Override
   public Action nextAction(Ressource[] ressources, LivingEntity[] entities) {
     Action nextAction = Action.MOVE;
+
+    //Si l'animal a suffisament d'énergie, se reproduit
+    if(body.getEnergie() > body.MAX_ENERGIE / 2){
+      nextAction = Action.REPRODUCE;
+      return nextAction;
+    }
 
     for(Ressource ressource : ressources){
       if(body.getX() == ressource.getX() && body.getY() == ressource.getY()){ // Si la ressource et l'entité sont sur la meme case

@@ -1,10 +1,3 @@
-package IntelligenceArtificiel;
-
-import Ecosys.Ressource;
-import Entity.LivingEntity;
-import Tools.Action;
-import Tools.Action.Movement;;
-
 /**
  * Class permettant aux {@codeLivingEntity} de faire de choix
  */
@@ -18,13 +11,6 @@ public interface IA {
    * @see Tools.Movement
    */
   public Movement nextMove(Ressource[] ressources, LivingEntity[] entities);
-
-  /**
-   * Renvoie le prochain mouvement choisis 
-   * @return Retourne la direction que l'entité souhaites aller:
-   * @see Tools.Action.Movement
-   */
-  public Movement nextMove();
 
   public Action nextAction(Ressource[] ressources, LivingEntity[] entities);
 }

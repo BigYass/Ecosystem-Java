@@ -1,8 +1,16 @@
-package Entity;
 
-import Ecosys.Ressource;
 
 public class Herbivore extends LivingEntity{
+
+  public Herbivore(int x, int y, int energie) {
+    super(x, y, energie);
+    cerveau = new HerbivoreRandomIA(this);
+  }
+
+  public Herbivore(int energie) {
+    super(energie);
+    cerveau = new HerbivoreRandomIA(this);
+  }
 
   @Override
   public void eat(Ressource ressource, int quantite) {

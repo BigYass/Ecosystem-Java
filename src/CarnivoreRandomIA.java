@@ -1,19 +1,9 @@
-package IntelligenceArtificiel;
-
-import Ecosys.Ressource;
-import Entity.Carnivore;
-import Entity.Entity;
-import Entity.LivingEntity;
-import Tools.Action;
-import Tools.Action.Movement;
-
 /**
  * IA au mouvement aléatoire et mangeant la proie la plus proche
  * <p>Réservé au carnivore
  */
 public class CarnivoreRandomIA extends RandomIA{ 
   
-  //TODO Régler le problème d'implémentation de nextMove()
   
   private final Carnivore body;
 
@@ -39,7 +29,13 @@ public class CarnivoreRandomIA extends RandomIA{
 
   @Override
   public Action nextAction(Ressource[] ressources, LivingEntity[] entities) {
-    Action nextAction = Action.WAIT;
+    Action nextAction = Action.MOVE;
+
+    //Si l'animal a suffisament d'énergie, se reproduit
+    if(body.getEnergie() > body.MAX_ENERGIE / 2){
+      nextAction = Action.REPRODUCE;
+      return nextAction;
+    }
 
     //Recherche les entités à porté
     for (Entity entity : entities){
@@ -53,7 +49,6 @@ public class CarnivoreRandomIA extends RandomIA{
     }
 
     //Sinon se déplace
-    nextAction = Action.MOVE;
     return nextAction;
   }
 

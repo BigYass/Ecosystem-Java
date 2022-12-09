@@ -1,7 +1,7 @@
-package Tools;
+
 
 public enum Action {
-  MOVE, EAT_ANIMAL, EAT_RESSOURCE, WAIT;
+  MOVE, EAT_ANIMAL, EAT_RESSOURCE, REPRODUCE;
 
   /**
    * Si l'action est {@code EAT_ANIMAL} ou {@code EAT_RESSOURCE} l'élémént visé est {@code entity}
@@ -22,25 +22,6 @@ public enum Action {
    */
   public void setTarget(Object target) {
     this.target = target;
-  }
-
-
-  /**
-   * Enum pour les mouvements 
-   */
-  public enum Movement{
-    GAUCHE, HAUT, DROITE, BAS;
-
-  /**
-   * Renvoie un mouvement aléatoire
-   * @return Renvoie un mouvement aléatoire parmis ceux présent dans mouvement
-   */
-  public static Movement randomDirection(){
-    Movement[] movements = values();
-    int l = movements.length;
-    return movements[(int) (Math.random() * l)];
-  }
-
   }
 
   

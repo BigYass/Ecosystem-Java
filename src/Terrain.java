@@ -1,4 +1,4 @@
-package Ecosys;
+
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Terrain extends Object{
   /**
    * Nombre de lignes et de colonnes du terrain crée
    */
-  public int nbLignes, nbCollonnes;
+  public int nbLignes, nbColonnes;
 
   /**
    * Constructeur de Terrain (tableau Ressource[][])

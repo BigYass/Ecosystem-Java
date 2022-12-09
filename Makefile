@@ -9,7 +9,7 @@ JC = javac
 	$(JC) $(JFLAGS) src/*.java
 	cp $(CLASS)/* $(BIN)
 
-CLASSES = src/Ecosys/Ressource.java src/Ecosys/Terrain.java src/TestTerrain.java
+CLASSES = src/TestTerrain src/TestSimulation
 
 MAIN = TestTerrain
 

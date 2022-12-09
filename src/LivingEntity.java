@@ -1,14 +1,11 @@
-package Entity;
-
 import java.util.ArrayList;
 
-import Ecosys.Ressource;
-import IntelligenceArtificiel.IA;
-import Tools.Action;
-import Tools.Action.Movement;
-
 public abstract class LivingEntity extends Entity{
+  /**
+   * Distance maximale à laquel un animal peut atteindre une ressource ou une autre entité
+   */
   protected final double maxReachDistance = 1.5;
+
   /**
    * Energie vitale permettant de faire des actions et de se reproduire
    */
@@ -25,11 +22,26 @@ public abstract class LivingEntity extends Entity{
   protected IA cerveau;
 
 
+  protected LivingEntity(int x, int y, int energie) {
+    super(x, y);
+    this.energie = energie;
+  }
+
+  protected LivingEntity(int energie) {
+    super(0, 0);
+    this.energie = energie;
+  }
+
+  protected LivingEntity(LivingEntity entity){
+    super(entity.getX(), entity.getY());
+    this.energie = entity.getEnergie();
+  }
+
   public double getMaxReach(){
     return maxReachDistance;
   }
 
-  public double getEnergie(){
+  public int getEnergie(){
     return energie;
   }
   /**
@@ -38,19 +50,16 @@ public abstract class LivingEntity extends Entity{
    * @param entities Liste des entités visible pour l'être vivant
    * @return Retourne 0
    */
-  public void doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities){
-    Action nextAction = cerveau.nextAction((Ressource[])ressources.toArray(), (LivingEntity[])entities.toArray());
+  public Action doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities){
+    Ressource[] ressourcesArray = ressources.toArray(new Ressource[ressources.size()]);
+    LivingEntity[] entitiesArray = entities.toArray(new LivingEntity[entities.size()]);
+    Action nextAction = cerveau.nextAction(ressourcesArray, entitiesArray);
     act(nextAction);
 
     energie--;
     if(energie < 0) die();
-  }
 
-  /**
-   * L'entité tente des manger/boire
-   */
-  public void doStuff(){
-    doStuff(null, null);
+    return nextAction;
   }
 
   /**
@@ -82,7 +91,7 @@ public abstract class LivingEntity extends Entity{
   public void act(Action action){
     switch (action) {
       case MOVE:
-        Movement nextMove = cerveau.nextMove();
+        Movement nextMove = cerveau.nextMove(null, null);
         int new_x = x, new_y = y;
 
         new_x += nextMove == Movement.GAUCHE ? 1 : 0 - (nextMove == Movement.DROITE ? 1 : 0);
@@ -108,6 +117,11 @@ public abstract class LivingEntity extends Entity{
         }
         break;
 
+      case REPRODUCE: //La simulation s'occupe de rajotuer le clone
+        energie /= 2;
+        if (energie < MAX_ENERGIE / 10) die(); //Si après la reproduction il ne lui reste moins de 10% d'énergie, l'animal meurt
+        break;
+
       default:
         break;
     }
@@ -120,4 +134,5 @@ public abstract class LivingEntity extends Entity{
   public void die(){
     energie = -1;
   }
+
 }

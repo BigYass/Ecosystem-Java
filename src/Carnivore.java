@@ -1,15 +1,15 @@
-package Entity;
 
-import java.util.ArrayList;
-
-import Ecosys.Ressource;
 
 public class Carnivore extends LivingEntity{
 
-  @Override
-  public void doStuff(ArrayList<Ressource> ressources, ArrayList<LivingEntity> entities) {
-    // TODO Auto-generated method stub
-    
+  public Carnivore(int x, int y, int energie) {
+    super(x, y, energie);
+    cerveau = new CarnivoreRandomIA(this);
+  }
+
+  public Carnivore(int energie) {
+    super(energie);
+    cerveau = new CarnivoreRandomIA(this);
   }
 
   @Override

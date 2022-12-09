@@ -1,6 +1,4 @@
-package Entity;
 
-import Ecosys.Ressource;
 
 public abstract class Entity extends Object{
   /**
@@ -56,10 +54,10 @@ public abstract class Entity extends Object{
   /**
    * @param xnew Nouvelle position x pour l'entité
    * @param ynew Nouvelle position y pour l'entité
-   * Déplace l'entité vers la position (xnew, ynew) si la case est vide, sinon reste fixe
+   * Déplace l'entité vers la position (xnew, ynew)
    */
   public void seDeplacer(int xnew, int ynew) { 
-    /* TODO */ 
+    x = xnew; y = ynew; 
   }
 
   public int getX() {

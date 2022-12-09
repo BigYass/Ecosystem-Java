@@ -1,9 +1,3 @@
-package IntelligenceArtificiel;
-
-import Ecosys.Ressource;
-import Entity.Entity;
-import Tools.Action.Movement;
-
 public abstract class RandomIA implements IA {
   /**
    * Probabilité de changer de position à chaque appel de nextMove
@@ -12,7 +6,7 @@ public abstract class RandomIA implements IA {
 
   /**
    * Dernière direction enregistrer, change si: <p><code>Math.random() < probToChangeDirection</code> 
-   * @see Tools.Action
+   * @see Action
    */
   protected Movement nextDirection;
 
@@ -48,15 +42,5 @@ public abstract class RandomIA implements IA {
    */
   public RandomIA(){
     this.nextDirection = Movement.GAUCHE;
-  }
-  
-  public Movement nextMove(Ressource[] ressources, Entity[] entities) {
-    if(Math.random() < probToChangeDirection)
-      nextDirection = Movement.randomDirection();
-    return nextDirection;
-  }
-
-  public Movement nextMove() {
-    return nextMove(null, null);
   }
 }

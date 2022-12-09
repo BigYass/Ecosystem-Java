@@ -1,13 +1,7 @@
 import java.util.ArrayList;
 
-import Ecosys.Ressource;
-import Ecosys.Terrain;
-
 public class TestTerrain {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		// Exemple de création de terrain
 		Terrain t = new Terrain(5,6);
