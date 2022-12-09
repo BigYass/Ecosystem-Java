@@ -8,13 +8,13 @@ public abstract class RandomIA implements IA {
   /**
    * Probabilité de changer de position à chaque appel de nextMove
    */
-  private double probToChangeDirection = .1;
+  protected double probToChangeDirection = .1;
 
   /**
    * Dernière direction enregistrer, change si: <p><code>Math.random() < probToChangeDirection</code> 
    * @see Tools.Action
    */
-  private Movement nextDirection;
+  protected Movement nextDirection;
 
   /**
    * Constructeur de <code>RandomIA</code>

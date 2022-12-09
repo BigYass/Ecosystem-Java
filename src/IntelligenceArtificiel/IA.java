@@ -2,6 +2,7 @@ package IntelligenceArtificiel;
 
 import Ecosys.Ressource;
 import Entity.LivingEntity;
+import Tools.Action;
 import Tools.Action.Movement;;
 
 /**
@@ -25,5 +26,5 @@ public interface IA {
    */
   public Movement nextMove();
 
-  public Movement nextAction(Ressource[] ressources, LivingEntity[] entities);
+  public Action nextAction(Ressource[] ressources, LivingEntity[] entities);
 }

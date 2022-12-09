@@ -1,7 +1,5 @@
 package IntelligenceArtificiel;
 
-import java.util.ArrayList;
-
 import Ecosys.Ressource;
 import Entity.Carnivore;
 import Entity.Entity;
@@ -57,6 +55,13 @@ public class CarnivoreRandomIA extends RandomIA{
     //Sinon se déplace
     nextAction = Action.MOVE;
     return nextAction;
+  }
+
+  @Override
+  public Movement nextMove(Ressource[] ressources, LivingEntity[] entities) {
+    if(Math.random() < probToChangeDirection)
+      nextDirection = Movement.randomDirection();
+    return nextDirection;
   }
   
 }
